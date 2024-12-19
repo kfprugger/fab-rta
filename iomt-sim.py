@@ -16,7 +16,7 @@ print("Starting the IoMT Synthetic Device Simulator...")
 key_vault_name = os.getenv("KEY_VAULT_NAME", "akv-rjb-wu3")
 secret_name = os.getenv("SECRET_NAME", "eventHubConn")
 event_hub_name = os.getenv("EVENT_HUB_NAME", "meddevice")
-message_limit = int(os.getenv("MESSAGE_LIMIT", 1)) 
+message_limit = int(os.getenv("MESSAGE_LIMIT", 3)) 
 
 # Azure Key Vault details
 key_vault_uri = f"https://{key_vault_name}.vault.azure.net/"
@@ -55,8 +55,8 @@ def generate_synthetic_data():
     systolic_bp = random.randint(90, 140)
     diastolic_bp = random.randint(60, 90)
     
-    # Generate synthetic body temperature data (in degrees Celsius)
-    temperature = round(random.uniform(36.0, 37.5), 1)
+    # Generate synthetic body temperature data (in degrees Farenheit)
+    temperature = round(random.uniform(90, 106.1), 1)
     
     # Create a dictionary to hold the synthetic data
     data = {
@@ -104,7 +104,7 @@ def main():
             print(f"Failed to send data: {e.message}")
         
         # Wait for 1 second before generating the next set of data
-        time.sleep(1)
+        
 
 if __name__ == "__main__":
     main()
